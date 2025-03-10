@@ -1,0 +1,1 @@
+type AuthType = "login" | "register";
