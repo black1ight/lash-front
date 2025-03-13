@@ -1,7 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  devIndicators: false,
-};
+	devIndicators: false,
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'placehold.co'
+			}
+		],
+		unoptimized: true
+	}
+}
 
-export default nextConfig;
+export default nextConfig
