@@ -1,4 +1,4 @@
-import { instance } from '../api/api.interceptor'
+import { axiosClassic, axiosWithAuth } from '../api/api.interceptor'
 import { IReview } from '../types/review.interface'
 
 const REVIEWS = 'reviews'
@@ -10,28 +10,28 @@ type TypeData = {
 
 export const ReviewsService = {
 	async getAll() {
-		return await instance<IReview[]>({
+		return await axiosClassic<IReview[]>({
 			url: REVIEWS,
 			method: 'GET'
 		})
 	},
 
 	async getById(reviewsId: number | string) {
-		return await instance<IReview>({
+		return await axiosWithAuth<IReview>({
 			url: `${REVIEWS}/${reviewsId}`,
 			method: 'GET'
 		})
 	},
 
 	async getAverageByProduct(productId: number | string) {
-		return await instance<{ rating: number }>({
+		return await axiosWithAuth<{ rating: number }>({
 			url: `${REVIEWS}/average-by-product/${productId}`,
 			method: 'GET'
 		})
 	},
 
 	async create(productId: number, data: TypeData) {
-		return await instance<IReview>({
+		return await axiosWithAuth<IReview>({
 			url: `${REVIEWS}/leave/${productId}`,
 			method: 'POST',
 			data
@@ -39,7 +39,7 @@ export const ReviewsService = {
 	},
 
 	async update(reviewsId: number, data: TypeData) {
-		return await instance<IReview>({
+		return await axiosWithAuth<IReview>({
 			url: `${REVIEWS}/${reviewsId}`,
 			method: 'PUT',
 			data
@@ -47,7 +47,7 @@ export const ReviewsService = {
 	},
 
 	async delete(reviewsId: number) {
-		return await instance<IReview>({
+		return await axiosWithAuth<IReview>({
 			url: `${REVIEWS}/${reviewsId}`,
 			method: 'DELETE'
 		})

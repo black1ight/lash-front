@@ -7,7 +7,6 @@ import { IAuthData, IAuthResponse } from './user.interface'
 export const authAction = createAsyncThunk<IAuthResponse, IAuthData>(
 	'auth',
 	async (data, thunkApi) => {
-		console.log(data)
 		try {
 			const response = await AuthService.main(data.type, { ...data.data })
 			return response

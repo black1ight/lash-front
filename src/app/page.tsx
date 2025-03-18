@@ -1,9 +1,9 @@
-import { NextPage } from 'next'
+import type { NextPage } from 'next'
 import CatalogPage from './catalog/page'
 
 const HomePage: NextPage = async () => {
 	return (
-		<div className='p-4'>
+		<div className=''>
 			<CatalogPage />
 		</div>
 	)

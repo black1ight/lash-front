@@ -1,18 +1,17 @@
-import { Metadata } from 'next'
-import Header from '../components/ui/header/Header'
-import Sidebar from '../components/ui/sidebar.tsx/Sidebar'
-import AuthProvider from '../providers/auth-providers/AuthProvider'
+import type { Metadata } from 'next'
+import Header from '../components/layouts/main-layout/header/Header'
+import Sidebar from '../components/layouts/main-layout/sidebar.tsx/Sidebar'
+import { SITE_DESCRIPTION, SITE_NAME } from '../constants/seo.constants'
 import ReduxProvider from '../providers/ReduxProvider'
 import './globals.css'
 import QueryProvider from './QueryProvider'
 
 export const metadata: Metadata = {
 	title: {
-		default: 'lash-store | beauty-shopp',
-		template: '',
-		absolute: ''
+		absolute: SITE_NAME,
+		template: `%s | ${SITE_NAME}`
 	},
-	description: 'lashes and more to you work'
+	description: SITE_DESCRIPTION
 }
 
 export default async function RootLayout({
@@ -21,20 +20,16 @@ export default async function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='en'>
+		<html lang='ua'>
 			<body>
 				<ReduxProvider>
-					<AuthProvider Component={{ isOnlyUser: true }}>
-						<QueryProvider>
-							<div>
-								<Header />
-								<div className='grid grid-cols-6'>
-									<Sidebar />
-									<main className='col-span-5'>{children}</main>
-								</div>
-							</div>
-						</QueryProvider>
-					</AuthProvider>
+					<QueryProvider>
+						<div className='grid grid-cols-6 bg-body gap-2 p-2'>
+							<Header />
+							<Sidebar />
+							<main className='col-span-5 bg-bg rounded-md'>{children}</main>
+						</div>
+					</QueryProvider>
 				</ReduxProvider>
 			</body>
 		</html>

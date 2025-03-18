@@ -16,6 +16,8 @@ export type TypeDataFilters = {
 }
 
 export enum enumProductSort {
+	RANK = 'rank',
+	DISCOUNT = 'discount',
 	HIGH_PRICE = 'high-price',
 	LOW_PRICE = 'low-price',
 	NEWEST = 'newest',

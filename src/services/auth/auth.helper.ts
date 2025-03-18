@@ -1,19 +1,28 @@
 import { IAuthResponse, ITokens } from '@/src/store/user/user.interface'
 import Cookies from 'js-cookie'
 
+export enum EnumTokens {
+	'ACCESS_TOKEN' = 'accessToken',
+	'REFRESH_TOKEN' = 'refreshToken'
+}
+
 export const getAccessToken = () => {
-	const accessToken = Cookies.get('accessToken')
+	const accessToken = Cookies.get(EnumTokens.ACCESS_TOKEN)
 	return accessToken || null
 }
 
 export const saveTokenStorage = (data: ITokens) => {
-	Cookies.set('accessToken', data.accessToken)
-	Cookies.set('refreshToken', data.refreshToken)
+	Cookies.set(EnumTokens.ACCESS_TOKEN, data.accessToken, {
+		domain: process.env.APP_DOMAIN,
+		sameSite: 'strict',
+		expires: 1
+	})
+	Cookies.set(EnumTokens.REFRESH_TOKEN, data.refreshToken)
 }
 
 export const removeFromStorage = () => {
-	Cookies.remove('accessToken')
-	Cookies.remove('refreshToken')
+	Cookies.remove(EnumTokens.ACCESS_TOKEN)
+	Cookies.remove(EnumTokens.REFRESH_TOKEN)
 	localStorage.removeItem('user')
 }
 

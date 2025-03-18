@@ -1,5 +1,5 @@
 import { getContentType } from '@/src/api/api.helper'
-import { instance } from '@/src/api/api.interceptor'
+import { axiosClassic } from '@/src/api/api.interceptor'
 import { IAuthResponse, IEmailPassword } from '@/src/store/user/user.interface'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -7,7 +7,7 @@ import { saveToStorage } from './auth.helper'
 
 export const AuthService = {
 	async main(type: 'login' | 'register', data: IEmailPassword) {
-		const response = await instance<IAuthResponse>({
+		const response = await axiosClassic<IAuthResponse>({
 			url: `/auth/${type}`,
 			method: 'POST',
 			data

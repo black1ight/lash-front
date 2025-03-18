@@ -30,9 +30,9 @@ const Auth: FC = () => {
 		reset()
 	}
 	return (
-		<section className='flex items-center justify-center w-full h-screen bg-[#f5f6fa]'>
+		<section className='flex items-center justify-center w-full h-screen bg-bg'>
 			<div className='max-w-[300px] shadow-md rounded-md p-6 bg-white'>
-				<Heading className='capitalize py-4 text-center'>{type}</Heading>
+				<Heading title='Auth' className='capitalize py-4 text-center' />
 				<form onSubmit={handleSubmit(onSubmit)} className=''>
 					<Field
 						placeholder='email'

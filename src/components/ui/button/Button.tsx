@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant: 'dark' | 'light'
-	size: 'sm' | 'md' | 'lg' | 'xl'
+	size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
 const sizeClasses = {
@@ -14,16 +14,22 @@ const sizeClasses = {
 }
 
 const Button: FC<PropsWithChildren<IButton>> = ({
+	variant,
 	children,
 	className,
-	size,
+	size = 'md',
 	...rest
 }) => {
 	return (
 		<button
 			{...rest}
 			className={cn(
-				`bg-linear-to-b from-rose-400 to-rose-600 text-white rounded-md h-10 flex items-center justify-center cursor-pointer transition hover:shadow-lg hover:shadow-rose-300 active:-translate-y-1 hover:scale-x-105`,
+				`bg-linear-to-b rounded-md h-10 flex items-center justify-center cursor-pointer transition hover:shadow-lg active:-translate-y-1 hover:scale-x-105 shadow`,
+				{
+					'from-rose-400 to-rose-600 text-white hover:shadow-rose-300':
+						variant === 'dark',
+					'from-white to-bg': variant === 'light'
+				},
 				sizeClasses[size],
 				className
 			)}

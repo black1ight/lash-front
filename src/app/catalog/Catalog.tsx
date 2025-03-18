@@ -1,14 +1,71 @@
-import { IProduct } from '@/src/types/product.interface'
-import { FC } from 'react'
-import ProductItem from './product-item/ProductItem'
+'use client'
 
-const Catalog: FC<{ products: IProduct[] }> = ({ products }) => {
+import SortDropdown from '@/src/components/layouts/main-layout/sort/SortDropdown'
+import Button from '@/src/components/ui/button/Button'
+import Heading from '@/src/components/ui/Heading'
+import { ProductService } from '@/src/services/product/product.service'
+import { enumProductSort } from '@/src/services/product/product.types'
+import { IProductsData } from '@/src/types/product.interface'
+import { useQuery } from '@tanstack/react-query'
+import { FC, useState } from 'react'
+import Products from '../../components/layouts/main-layout/Products/product-item/Products'
+
+interface CatalogProps {
+	data: IProductsData
+	slug?: string
+}
+
+const Catalog: FC<CatalogProps> = ({ data, slug = '' }) => {
+	const [products, setProducts] = useState([])
+	const [page, setPage] = useState(1)
+	const [sortType, setSortType] = useState<enumProductSort>(
+		enumProductSort.RANK
+	)
+
+	const { data: response, isLoading } = useQuery({
+		queryKey: ['products', sortType, page],
+		queryFn: () =>
+			ProductService.getAll({
+				page,
+				perPage: 8,
+				sort: sortType
+			}),
+		initialData: data,
+		enabled: !slug
+	})
+
+	const { data: categoryResponse } = useQuery({
+		queryKey: ['products-by-category', sortType, page],
+		queryFn: () =>
+			ProductService.getByCategory(slug, {
+				page,
+				perPage: 8,
+				sort: sortType
+			}),
+		initialData: data,
+		enabled: !!slug
+	})
+
 	return (
-		<section className='grid grid-cols-4 gap-8'>
-			{products.map(product => (
-				<ProductItem key={product.id} product={product} />
-			))}
-		</section>
+		<div className='p-4'>
+			<Heading title='Catalog' />
+			<SortDropdown sortType={sortType} setSortType={setSortType} />
+			<Products
+				products={
+					slug && categoryResponse
+						? categoryResponse.products
+						: response.products
+				}
+			/>
+			<Button
+				onClick={() => setPage(page + 1)}
+				className='mt-10 mx-auto '
+				variant='light'
+				size='sm'
+			>
+				more
+			</Button>
+		</div>
 	)
 }
 

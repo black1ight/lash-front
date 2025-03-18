@@ -1,14 +1,15 @@
-import cn from "clsx";
-import { FC, PropsWithChildren } from "react";
+import cn from 'clsx'
+import { FC } from 'react'
 
 interface IHeading {
-  className?: string;
+	className?: string
+	title: string
 }
 
-const Heading: FC<PropsWithChildren<IHeading>> = ({ className, children }) => {
-  return (
-    <h1 className={cn("font-semibold text-3xl", className)}>{children}</h1>
-  );
-};
+const Heading: FC<IHeading> = ({ className, title }) => {
+	return (
+		<h1 className={cn('font-semibold text-3xl mb-4', className)}>{title}</h1>
+	)
+}
 
-export default Heading;
+export default Heading

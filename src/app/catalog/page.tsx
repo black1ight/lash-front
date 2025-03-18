@@ -1,15 +1,24 @@
 import { ProductService } from '@/src/services/product/product.service'
+import type { Metadata } from 'next'
 import { NextPage } from 'next'
+import { cookies } from 'next/headers'
 import Catalog from './Catalog'
 
 interface Props {}
 
+export const metadata: Metadata = {
+	title: 'Catalog'
+}
+
 const CatalogPage: NextPage<Props> = async ({}) => {
-	const { data: products } = await ProductService.getAll()
+	const cookieStore = await cookies()
+	const refreshToken = cookieStore.get('refreshToken')
+
+	const data = await ProductService.getAll()
 
 	return (
 		<div>
-			<Catalog products={products.products} />
+			<Catalog data={data} />
 		</div>
 	)
 }

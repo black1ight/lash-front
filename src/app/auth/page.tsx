@@ -1,7 +1,7 @@
 import { Metadata, NextPage } from 'next'
 import Auth from './Auth'
 export const metadata: Metadata = {
-	title: { absolute: 'Authorization' }
+	title: 'Авторизація'
 }
 const Page: NextPage = async () => {
 	return (

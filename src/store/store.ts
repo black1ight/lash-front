@@ -16,7 +16,7 @@ import { userSlice } from './user/user.slice'
 const persistConfig = {
 	key: 'lash-market',
 	storage,
-	whitelist: []
+	whitelist: ['cart', 'user']
 }
 
 const rootReducers = combineReducers({

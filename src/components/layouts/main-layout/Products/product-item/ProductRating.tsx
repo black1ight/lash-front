@@ -25,6 +25,7 @@ const ProductRating: FC<{ product: IProduct }> = ({ product }) => {
 				transition
 			/>
 			<span>({product.reviews.length})</span>
+			<span>{product.rank}</span>
 		</div>
 	)
 }
