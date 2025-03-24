@@ -37,7 +37,7 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
 					{convertPrice(product.price)}
 				</span>
 			)}
-			<span className={`text-xl ${product.discount > 0 && 'text-rose-600'}`}>
+			<span className={`text-xl ${product.discount > 0 && 'text-pink-600'}`}>
 				{convertPrice(
 					product.discount > 0
 						? product.price - product.discount

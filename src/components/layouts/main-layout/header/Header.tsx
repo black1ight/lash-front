@@ -11,14 +11,14 @@ const Header: FC = () => {
 	const { user } = useUser()
 	const { logout } = useActions()
 	return (
-		<div className='col-span-6 p-4 bg-bg flex rounded-md'>
+		<div className='col-span-6 p-4 bg-bg flex rounded-lg'>
 			<Link
 				href={PUBLIC_URL.home()}
-				className='text-2xl text-rose-500 bg-white px-2 py-1 rounded-md'
+				className='text-2xl text-pink-500 bg-white px-2 py-1 rounded-lg'
 			>
 				LoGo
 			</Link>
-			<div className='ml-auto flex gap-2 items-center bg-white px-2 py-1 rounded-md'>
+			<div className='ml-auto flex gap-2 items-center bg-white px-2 py-1 rounded-lg'>
 				<span>{user?.email}</span>
 				<span onClick={logout} className='text-teal-700 cursor-pointer'>
 					<CiLogout size={24} />

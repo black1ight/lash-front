@@ -15,6 +15,15 @@ export interface IProduct {
 	category: ICategory
 }
 
+export interface IProductInput {
+	name: string
+	description: string
+	price: number
+	discount: number
+	images: string[]
+	categoryId: number
+}
+
 export interface IProductDetails {
 	product: IProduct
 }

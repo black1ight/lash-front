@@ -44,13 +44,13 @@ const SortDropdown: FC<SortDropdownProps> = ({ sortType, setSortType }) => {
 				<div
 					className={`${
 						showSort ? 'bg-linear-0 from-rose-50 to-white' : 'bg-white'
-					} py-1 rounded-md w-28 px-4 shadow font-semibold hover:bg-linear-0 hover:from-rose-50 hover:to-white`}
+					} py-1 rounded-lg w-28 px-4 shadow font-semibold hover:bg-linear-0 hover:from-rose-50 hover:to-white`}
 				>
 					{sortType}
 				</div>
 			</div>
 			{showSort && (
-				<ul className='w-28 absolute top-10 right-0 z-10 bg-white rounded-md text-nowrap border-2 border-white shadow-2xl'>
+				<ul className='w-28 absolute top-10 right-0 z-10 bg-white rounded-lg text-nowrap border-2 border-white shadow-2xl'>
 					{(
 						Object.keys(enumProductSort) as Array<keyof typeof enumProductSort>
 					).map(key => {

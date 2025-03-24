@@ -1,16 +1,21 @@
 import { axiosWithAuth } from '../api/api.interceptor'
+import {
+	IMainStatistics,
+	IMiddleStatistics
+} from '../types/statistics.interface'
 
 const STATISTICS = 'statistics'
 
-export type TypeStatisticsResponse = {
-	name: string
-	value: number
-}[]
-
-export const OrderService = {
+export const StatisticService = {
 	async getMain() {
-		return axiosWithAuth<TypeStatisticsResponse>({
+		return axiosWithAuth<IMainStatistics[]>({
 			url: `${STATISTICS}/main`,
+			method: 'GET'
+		})
+	},
+	async getMiddle() {
+		return axiosWithAuth<IMiddleStatistics>({
+			url: `${STATISTICS}/middle`,
 			method: 'GET'
 		})
 	}

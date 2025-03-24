@@ -19,8 +19,9 @@ export const CABINET_URL = {
 export const STORE_URL = {
 	root: (url = '') => `/store${url ? url : ''}`,
 
-	home: () => STORE_URL.root('/'),
+	home: () => STORE_URL.root(''),
 	products: () => STORE_URL.root('/products'),
+	productCreate: () => STORE_URL.root('/products/create'),
 	productEdit: (id = '') => STORE_URL.root(`/products/${id}`),
 	categories: () => STORE_URL.root('/categories'),
 	categoryCreate: () => STORE_URL.root('/categories/create'),

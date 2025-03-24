@@ -7,7 +7,7 @@ import Category from './category/Category'
 const Sidebar = () => {
 	const pathname = usePathname()
 	return (
-		<aside className='p-4 h-screen col-span-1 bg-bg rounded-md'>
+		<aside className='p-4 h-screen col-span-1 bg-bg rounded-lg'>
 			{pathname.includes('store') ? <Navigation /> : <Category />}
 		</aside>
 	)

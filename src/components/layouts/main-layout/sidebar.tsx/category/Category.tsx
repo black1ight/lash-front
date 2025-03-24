@@ -17,14 +17,14 @@ const Category: FC = () => {
 	return (
 		<div>
 			<h3 className='mb-2'>Categories:</h3>
-			<div className='bg-white rounded-md px-2 py-2'>
+			<div className='bg-white rounded-lg px-2 py-2'>
 				<ul className='flex flex-col gap-2 py-1'>
 					{categories?.map(category => {
 						return (
 							<li className='relative' key={category.name}>
 								<Link
-									className={cn('gap-1 cursor-pointer hover:text-sky-600', {
-										'text-sky-600': currentPath === category.slug
+									className={cn('gap-1 cursor-pointer hover:text-pink-600', {
+										'text-pink-600': currentPath === category.slug
 									})}
 									href={
 										category.slug === '' ? '/' : `/category/${category.slug}`

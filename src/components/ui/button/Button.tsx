@@ -2,7 +2,7 @@ import cn from 'clsx'
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-	variant: 'dark' | 'light'
+	variant: 'dark' | 'light' | 'ghost'
 	size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
@@ -24,11 +24,13 @@ const Button: FC<PropsWithChildren<IButton>> = ({
 		<button
 			{...rest}
 			className={cn(
-				`bg-linear-to-b rounded-md h-10 flex items-center justify-center cursor-pointer transition hover:shadow-lg active:-translate-y-1 hover:scale-x-105 shadow`,
+				` h-10 flex items-center justify-center cursor-pointer transition `,
 				{
-					'from-rose-400 to-rose-600 text-white hover:shadow-rose-300':
+					'from-rose-400 to-rose-600 text-white hover:shadow-rose-300 shadow hover:shadow-lg active:-translate-y-1 hover:scale-x-105 bg-linear-to-b rounded-md':
 						variant === 'dark',
-					'from-white to-bg': variant === 'light'
+					'from-white to-bg shadow hover:shadow-lg active:-translate-y-1 hover:scale-x-105 bg-linear-to-b rounded-md':
+						variant === 'light',
+					'hover:bg-sky-100': variant === 'ghost'
 				},
 				sizeClasses[size],
 				className

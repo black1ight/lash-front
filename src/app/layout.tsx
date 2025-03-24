@@ -27,7 +27,9 @@ export default async function RootLayout({
 						<div className='grid grid-cols-6 bg-body gap-2 p-2'>
 							<Header />
 							<Sidebar />
-							<main className='col-span-5 bg-bg rounded-md'>{children}</main>
+							<main className='col-span-5 bg-bg rounded-lg p-4'>
+								{children}
+							</main>
 						</div>
 					</QueryProvider>
 				</ReduxProvider>

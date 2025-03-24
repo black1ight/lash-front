@@ -25,19 +25,19 @@ export function Navigation() {
 		},
 		{
 			icon: Star,
-			link: STORE_URL.home(),
+			link: STORE_URL.reviews(),
 			value: 'Відгуки'
 		},
 		{
 			icon: Settings,
-			link: STORE_URL.home(),
+			link: STORE_URL.settings(),
 			value: 'Налаштування'
 		}
 	]
 
 	return (
-		<div className={cn('bg-white p-2 rounded-md')}>
-			<div className={cn('flex flex-col gap-4')}>
+		<div className={cn(' p-3 rounded-lg')}>
+			<div className={cn('flex flex-col gap-3')}>
 				{routes.map(route => (
 					<MenuItem key={route.value} route={route} />
 				))}

@@ -1,5 +1,5 @@
 import { axiosClassic, axiosWithAuth } from '../api/api.interceptor'
-import { ICategory } from '../types/category.interface'
+import { ICategory, ICategoryInput } from '../types/category.interface'
 
 const CATEGORY = 'categories'
 
@@ -25,18 +25,19 @@ export const CategoryService = {
 		})
 	},
 
-	async create() {
+	async create(data: ICategoryInput) {
 		return await axiosWithAuth<ICategory>({
 			url: CATEGORY,
-			method: 'POST'
+			method: 'POST',
+			data
 		})
 	},
 
-	async update(categoryId: number | string, name: string) {
+	async update(categoryId: number | string, data: ICategoryInput) {
 		return await axiosWithAuth<ICategory>({
 			url: `${CATEGORY}/${categoryId}`,
 			method: 'PUT',
-			data: { name }
+			data
 		})
 	},
 

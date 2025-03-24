@@ -1,5 +1,9 @@
 import { axiosClassic, axiosWithAuth } from '@/src/api/api.interceptor'
-import { IProduct, IProductsData } from '@/src/types/product.interface'
+import {
+	IProduct,
+	IProductInput,
+	IProductsData
+} from '@/src/types/product.interface'
 import { PRODUCT, TypeDataFilters, TypeProduct } from './product.types'
 
 export const ProductService = {
@@ -42,20 +46,22 @@ export const ProductService = {
 		})
 	},
 
-	async create(data: TypeProduct) {
-		return await axiosWithAuth<IProduct>({
+	async create(product: TypeProduct) {
+		const { data } = await axiosWithAuth<IProduct>({
 			url: PRODUCT,
 			method: 'POST',
-			data
+			data: product
 		})
+		return data
 	},
 
-	async update(productId: number | string, name: string) {
-		return await axiosWithAuth<IProduct>({
+	async update(productId: string, inputData: IProductInput) {
+		const { data } = await axiosWithAuth<IProduct>({
 			url: `${PRODUCT}/${productId}`,
 			method: 'PUT',
-			data: { name }
+			data: inputData
 		})
+		return data
 	},
 
 	async delete(productId: number | string) {

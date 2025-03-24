@@ -35,7 +35,7 @@ const FavoriteButton: FC<PropsWithChildren<FavoriteButonProps>> = ({
 	return (
 		<div
 			className={cn(
-				`${isExists ? 'text-rose-600' : 'text-white'} absolute right-2 top-2 `,
+				`${isExists ? 'text-pink-600' : 'text-white'} absolute right-2 top-2 `,
 				className
 			)}
 		>
