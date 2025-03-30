@@ -12,17 +12,19 @@ export const CategoryService = {
 	},
 
 	async getById(categoryId: number | string) {
-		return await axiosClassic<ICategory>({
+		const { data } = await axiosWithAuth<ICategory>({
 			url: `${CATEGORY}/${categoryId}`,
 			method: 'GET'
 		})
+		return data
 	},
 
 	async getBySlug(slug: string) {
-		return await axiosClassic<ICategory>({
-			url: `${CATEGORY}/by-slug${slug}`,
+		const { data: category } = await axiosClassic<ICategory>({
+			url: `${CATEGORY}/by-slug/${slug}`,
 			method: 'GET'
 		})
+		return category
 	},
 
 	async create(data: ICategoryInput) {

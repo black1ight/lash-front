@@ -1,5 +1,12 @@
-const Home = () => {
-	return <div>Home</div>
+import { IProductsData } from '@/src/types/product.interface'
+import Catalog from './catalog/Catalog'
+interface HomeProps {
+	productsData: IProductsData
 }
-
-export default Home
+export function Home({ productsData }: HomeProps) {
+	return (
+		<div>
+			<Catalog data={productsData} />
+		</div>
+	)
+}

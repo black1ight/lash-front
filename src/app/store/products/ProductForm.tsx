@@ -11,6 +11,7 @@ import {
 } from '@/src/components/ui/Form'
 import Heading from '@/src/components/ui/Heading'
 import { Input } from '@/src/components/ui/Input'
+import ConfirmModal from '@/src/components/ui/modals/ConfirmModal'
 import {
 	Select,
 	SelectContent,
@@ -25,6 +26,9 @@ import { useDeleteProduct } from '@/src/hooks/queries/products/useDeleteProduct'
 import { useUpdateProduct } from '@/src/hooks/queries/products/useUpdateProduct'
 import { ICategory } from '@/src/types/category.interface'
 import { IProduct, IProductInput } from '@/src/types/product.interface'
+import { Plus, SquareX, Trash } from 'lucide-react'
+import Image from 'next/image'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface ProductFormProps {
@@ -33,6 +37,9 @@ interface ProductFormProps {
 }
 
 export function ProductForm({ product = null, categories }: ProductFormProps) {
+	const [imagesUrl, setImageUrl] = useState<string[]>(product?.images || [])
+	const [inputValue, setInputValue] = useState<string>('')
+
 	const { createProduct, isLoadingCreate } = useCreateProduct()
 	const { updateProduct, isLoadingUpdate } = useUpdateProduct()
 	const { deleteProduct, isLoadingDelete } = useDeleteProduct()
@@ -64,6 +71,15 @@ export function ProductForm({ product = null, categories }: ProductFormProps) {
 			  }
 	})
 
+	const imageButtonHandler = () => {
+		if (!inputValue.trim()) return
+
+		const newImages = [...imagesUrl, inputValue]
+		setImageUrl(newImages)
+		form.setValue('images', newImages)
+		setInputValue('')
+	}
+
 	const onSubmit: SubmitHandler<IProductInput> = data => {
 		if (product) updateProduct(data)
 		else createProduct(data)
@@ -71,12 +87,33 @@ export function ProductForm({ product = null, categories }: ProductFormProps) {
 
 	return (
 		<div className='space-y-4'>
-			<div>
+			<div className='flex'>
 				<Heading title={title} description={description} />
-				{/* {product && (
-        
-      )} */}
+				{product && (
+					<ConfirmModal handleClick={() => deleteProduct()}>
+						<Button
+							className='ml-auto cursor-pointer text-pink-600 hover:text-pink-600'
+							size='icon'
+							variant='outline'
+							disabled={isLoadingDelete}
+						>
+							<Trash className='size-4' />
+						</Button>
+					</ConfirmModal>
+				)}
 			</div>
+			<div className='mt-2 flex flex-wrap gap-2'>
+				{(product?.images || imagesUrl)?.map((url, id) => (
+					<div key={url} className='relative shadow'>
+						<Image src={url} width={100} height={100} alt='зобаження' />
+						<SquareX
+							className='absolute top-1 right-1 opacity-50 hover:opacity-100 cursor-pointer'
+							strokeWidth={1}
+						/>
+					</div>
+				))}
+			</div>
+
 			<div>
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -87,20 +124,34 @@ export function ProductForm({ product = null, categories }: ProductFormProps) {
 								required: 'Мінімум - одне зображення'
 							}}
 							render={({ field }) => (
-								<FormItem>
+								<FormItem className=''>
 									<FormLabel>Зображення</FormLabel>
-									<FormControl>
-										<Input
-											placeholder='URL зображення'
-											disabled={isLoadingCreate || isLoadingUpdate}
-											{...field}
-										/>
-									</FormControl>
+									<div className='flex gap-4'>
+										<FormControl>
+											<Input
+												placeholder='url зображення'
+												disabled={isLoadingCreate || isLoadingUpdate}
+												{...field}
+												onChange={event => {
+													setInputValue(event.currentTarget.value)
+													field.onChange(event.target.value)
+												}}
+											/>
+										</FormControl>
+										<Button
+											className='shadow'
+											variant='outline'
+											size='icon'
+											onClick={imageButtonHandler}
+										>
+											<Plus />
+										</Button>
+									</div>
 									<FormMessage />
 								</FormItem>
 							)}
 						></FormField>
-						<div className='grid grid-cols-4 gap-4 space-y-4 items-start'>
+						<div className='grid grid-cols-2 gap-4 items-start'>
 							<FormField
 								control={form.control}
 								name='name'
@@ -121,7 +172,42 @@ export function ProductForm({ product = null, categories }: ProductFormProps) {
 									</FormItem>
 								)}
 							></FormField>
-
+							<FormField
+								control={form.control}
+								name='categoryId'
+								rules={{
+									required: "Категорія обов'язкова"
+								}}
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Категорія</FormLabel>
+										<Select
+											disabled={isLoadingCreate || isLoadingUpdate}
+											onValueChange={value => field.onChange(Number(value))}
+											defaultValue={categories[0]?.name || ''}
+										>
+											<FormControl>
+												<SelectTrigger className='w-full'>
+													<SelectValue placeholder='Категорія товару' />
+												</SelectTrigger>
+											</FormControl>
+											<SelectContent>
+												<SelectGroup>
+													{categories.map(category => (
+														<SelectItem
+															value={category.id.toString()}
+															key={category.name}
+														>
+															{category.name}
+														</SelectItem>
+													))}
+												</SelectGroup>
+											</SelectContent>
+										</Select>
+										<FormMessage />
+									</FormItem>
+								)}
+							></FormField>
 							<FormField
 								control={form.control}
 								name='price'
@@ -174,42 +260,6 @@ export function ProductForm({ product = null, categories }: ProductFormProps) {
 												}}
 											/>
 										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							></FormField>
-							<FormField
-								control={form.control}
-								name='categoryId'
-								rules={{
-									required: "Категорія обов'язкова"
-								}}
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Категорія</FormLabel>
-										<Select
-											disabled={isLoadingCreate || isLoadingUpdate}
-											onValueChange={field.onChange}
-											defaultValue={categories[0]?.name || ''}
-										>
-											<FormControl>
-												<SelectTrigger className='w-full'>
-													<SelectValue placeholder='Категорія товару' />
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent>
-												<SelectGroup>
-													{categories.map(category => (
-														<SelectItem
-															value={category.name}
-															key={category.name}
-														>
-															{category.name}
-														</SelectItem>
-													))}
-												</SelectGroup>
-											</SelectContent>
-										</Select>
 										<FormMessage />
 									</FormItem>
 								)}

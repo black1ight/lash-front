@@ -12,14 +12,9 @@ const options: CreateAxiosDefaults = {
 const axiosClassic = axios.create(options)
 const axiosWithAuth = axios.create(options)
 
-// export const instance = axios.create({
-// 	baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
-// 	headers: getContentType(),
-// 	withCredentials: true
-// })
-
-axiosWithAuth.interceptors.request.use(config => {
+axiosWithAuth.interceptors.request.use(async config => {
 	const accessToken = getAccessToken()
+
 	if (config.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
 	}

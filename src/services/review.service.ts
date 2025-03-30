@@ -10,10 +10,11 @@ type TypeData = {
 
 export const ReviewsService = {
 	async getAll() {
-		return await axiosClassic<IReview[]>({
+		const { data } = await axiosClassic<IReview[]>({
 			url: REVIEWS,
 			method: 'GET'
 		})
+		return data
 	},
 
 	async getById(reviewsId: number | string) {

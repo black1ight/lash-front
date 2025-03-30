@@ -9,7 +9,7 @@ import ProductRating from './ProductRating'
 
 const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
 	return (
-		<div className='w-full rounded-md overflow-hidden bg-white p-2 shadow'>
+		<div className='w-full rounded-md overflow-hidden bg-white p-2 shadow-xl'>
 			<div className='relative'>
 				<FavoriteButton className='' productId={product.id} size={20} />
 				<AddToCartButton className='' product={product} size={20} />
@@ -19,13 +19,15 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
 						width={0}
 						height={0}
 						sizes='100vw'
-						style={{ width: '100%', height: 'auto' }}
+						style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }}
 						src={product.images[0]}
 						alt={product.name}
 					/>
 				</Link>
 			</div>
-			<h3 className='mt-2'>{product.name}</h3>
+			<h3 className='mt-2 whitespace-nowrap overflow-hidden text-ellipsis'>
+				{product.name}
+			</h3>
 			<Link href={`/category/${product.category.slug}`}>
 				<div className='text-blue-500 text-sm font-semibold'>
 					{product.category.name}

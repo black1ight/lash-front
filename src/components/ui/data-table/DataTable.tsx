@@ -11,6 +11,7 @@ import {
 	useReactTable
 } from '@tanstack/react-table'
 
+import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { Input } from '../Input'
 import {
@@ -70,9 +71,14 @@ export function DataTable<TData, TValue>({
 					<TableHeader>
 						{table.getHeaderGroups().map(headerGroup => (
 							<TableRow key={headerGroup.id}>
-								{headerGroup.headers.map(header => {
+								{headerGroup.headers.map((header, id) => {
 									return (
-										<TableHead key={header.id}>
+										<TableHead
+											className={cn({
+												'pl-4.5': id === headerGroup.headers.length - 1
+											})}
+											key={header.id}
+										>
 											{header.isPlaceholder
 												? null
 												: flexRender(

@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
 import {
 	FLUSH,
 	PAUSE,
@@ -11,7 +12,9 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { cartSlice } from './cart/cart.slice'
-import { userSlice } from './user/user.slice'
+
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch
 
 const persistConfig = {
 	key: 'lash-market',
@@ -20,9 +23,8 @@ const persistConfig = {
 }
 
 const rootReducers = combineReducers({
-	cart: cartSlice.reducer,
+	cart: cartSlice.reducer
 	// carousel: carouselSlice.reducer,
-	user: userSlice.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducers)

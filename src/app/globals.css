@@ -1,11 +1,12 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-	--color-bg: #f5f6fa;
+	--color-bg: #ffffff;
 	--color-body: #ffffff;
+	--color-text: oklch(0.269 0 0);
 }
 
 :root {
@@ -116,10 +117,10 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+	* {
+		@apply border-border outline-ring/50;
 	}
-  body {
-    @apply bg-background text-foreground;
+	body {
+		@apply bg-background text-foreground;
 	}
 }

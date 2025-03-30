@@ -10,7 +10,9 @@ interface IHeading {
 const Heading: FC<IHeading> = ({ className, title, description }) => {
 	return (
 		<div className='space-y-3'>
-			<h1 className={cn('font-semibold text-3xl', className)}>{title}</h1>
+			<h1 className={cn('font-semibold text-3xl tracking-wide', className)}>
+				{title}
+			</h1>
 			{description && <span>{description}</span>}
 		</div>
 	)

@@ -1,6 +1,6 @@
 'use client'
 
-import Button from '@/src/components/ui/button/Button'
+import { Button } from '@/src/components/ui/Button'
 import { DataTable } from '@/src/components/ui/data-table/DataTable'
 import DataTableLoading from '@/src/components/ui/data-table/DataTableLoading'
 import Heading from '@/src/components/ui/Heading'
@@ -25,7 +25,7 @@ export function Products() {
 		: []
 
 	return (
-		<div className=''>
+		<div className='space-y-4'>
 			{isLoading ? (
 				<DataTableLoading />
 			) : (
@@ -34,14 +34,14 @@ export function Products() {
 						<Heading title='Товари' description='Всі товари' />
 						<div className='ml-auto'>
 							<Link href={STORE_URL.productCreate()}>
-								<Button variant='dark'>
-									<Plus size={20} className='mr-2' />
+								<Button variant='default'>
+									<Plus size={20} className='' />
 									Створити
 								</Button>
 							</Link>
 						</div>
 					</div>
-					<div className='bg-white p-4 rounded-lg'>
+					<div className='bg-white rounded-lg'>
 						<DataTable
 							columns={productColumns}
 							data={formattedProducts}

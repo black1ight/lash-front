@@ -25,7 +25,9 @@ const AddToCartButton: FC<AddToCartButtonProps> = ({
 	return (
 		<div
 			className={cn(
-				`${currentItem ? 'text-black' : 'text-white'} absolute left-2 top-2 `,
+				`${
+					currentItem ? 'text-black' : 'text-stone-500'
+				} absolute left-2 top-2 `,
 				className
 			)}
 		>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { EnumTokens } from './services/auth/auth.helper'
 
 export async function middleware(request: NextRequest) {
-	const refreshToken = request.cookies.get(EnumTokens.REFRESH_TOKEN)?.value
+	const refreshToken = request.cookies.get(EnumTokens.REFRESH_TOKEN)
 
 	const isAuthPage = request.url.includes('/auth')
 
@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
 		return NextResponse.next()
 	}
 
-	if (refreshToken === undefined) {
+	if (refreshToken === undefined || '') {
 		return NextResponse.redirect(new URL('/auth', request.url))
 	}
 
@@ -21,5 +21,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/auth', '/store/:path*', '/category/:path*']
+	matcher: ['/auth', '/store/:path*', '/cabinet/:path*']
 }

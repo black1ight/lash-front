@@ -17,10 +17,11 @@ export const ProductService = {
 	},
 
 	async getById(productId: number | string) {
-		return await axiosClassic<IProduct>({
+		const data = await axiosWithAuth<IProduct>({
 			url: `${PRODUCT}/${productId}`,
 			method: 'GET'
 		})
+		return data
 	},
 
 	async getBySlug(slug: string) {

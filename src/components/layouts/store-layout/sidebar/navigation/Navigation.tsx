@@ -36,7 +36,7 @@ export function Navigation() {
 	]
 
 	return (
-		<div className={cn(' p-3 rounded-lg')}>
+		<div className={cn('text-stone-900 py-3 rounded-lg')}>
 			<div className={cn('flex flex-col gap-3')}>
 				{routes.map(route => (
 					<MenuItem key={route.value} route={route} />

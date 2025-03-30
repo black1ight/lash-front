@@ -1,4 +1,4 @@
-import Button from '@/src/components/ui/button/Button'
+import { Button } from '@/src/components/ui/Button'
 import {
 	DropdownMenuContent,
 	DropdownMenuItem,
@@ -31,7 +31,7 @@ export const productColumns: ColumnDef<IProductColumn>[] = [
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
 					Назва
-					<ArrowUpDown className='ml-2 size-4' />
+					<ArrowUpDown className='size-4' />
 				</Button>
 			)
 		}
@@ -67,10 +67,10 @@ export const productColumns: ColumnDef<IProductColumn>[] = [
 	{
 		accessorKey: 'actions',
 		header: 'Дії',
-		cell: ({ row }) => {
-			;<DropdownMenu>
+		cell: ({ row }) => (
+			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant='light' className='h-8 w-8 p-0'>
+					<Button variant='ghost' className='h-8 w-8 p-0'>
 						<MoreHorizontal className='h-4 w-4' />
 					</Button>
 				</DropdownMenuTrigger>
@@ -90,6 +90,6 @@ export const productColumns: ColumnDef<IProductColumn>[] = [
 					</Link>
 				</DropdownMenuContent>
 			</DropdownMenu>
-		}
+		)
 	}
 ]
