@@ -22,9 +22,9 @@ const Auth: FC = () => {
 	const { onSubmit, form, isPending } = useAuthForm(type)
 
 	return (
-		<div>
+		<div className='w-full h-screen bg-neutral-100 flex justify-center items-center'>
 			<Card>
-				<CardHeader>
+				<CardHeader className='text-center'>
 					<CardTitle>
 						{type === 'register' ? 'Створити аккаунт' : 'Увійти в аккаунт'}
 					</CardTitle>
@@ -40,13 +40,13 @@ const Auth: FC = () => {
 							onSubmit={form.handleSubmit(onSubmit)}
 						>
 							<AuthFields form={form} isPending={isPending} type={type} />
-							<Button className='w-40' disabled={isPending}>
+							<Button className='w-full' disabled={isPending}>
 								{type === 'register' ? 'Створити' : 'Увійти'}
 							</Button>
 						</form>
 					</Form>
 				</CardContent>
-				<CardFooter>
+				<CardFooter className='mx-auto'>
 					<Button
 						onClick={() =>
 							setType(prev => (prev === 'register' ? 'login' : 'register'))

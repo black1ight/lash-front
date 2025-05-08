@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { Home } from './Home'
 
 export const metadata: Metadata = {
-	title: 'Наш асортимент - твій креативний простір.'
+	title: 'Наш асортимент - твій креативний простір'
 }
 
 async function getProducts() {

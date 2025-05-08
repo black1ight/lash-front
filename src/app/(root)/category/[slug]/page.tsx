@@ -1,7 +1,7 @@
 import { CategoryService } from '@/src/services/category.service'
 import { ProductService } from '@/src/services/product/product.service'
 import { NextPage } from 'next'
-import Catalog from '../../../../components/layouts/main-layout/catalog/Catalog'
+import Catalog from '../../catalog/Catalog'
 
 interface CategoryPageProps {
 	params: Promise<{
@@ -20,7 +20,9 @@ export const generateStaticParams = async () => {
 }
 
 export const getProducts = async (slug: string) => {
-	return await ProductService.getByCategory(slug)
+	const category = await CategoryService.getBySlug(slug)
+	const products = await ProductService.getByCategory(slug)
+	return { category, products }
 }
 
 const CategoryPage: NextPage<CategoryPageProps> = async ({
@@ -29,9 +31,16 @@ const CategoryPage: NextPage<CategoryPageProps> = async ({
 	params: Promise<{ slug: string }>
 }) => {
 	const { slug } = await params
-	const products = await getProducts(slug)
+	const { category, products } = await getProducts(slug)
 
-	return <Catalog data={products} slug={slug} />
+	return (
+		<Catalog
+			data={products}
+			slug={slug}
+			title={category.name}
+			description={category.name}
+		/>
+	)
 }
 
 export default CategoryPage

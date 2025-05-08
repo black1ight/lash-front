@@ -23,14 +23,7 @@ const AddToCartButton: FC<AddToCartButtonProps> = ({
 	const currentItem =
 		items?.find(cartItem => cartItem.product.id === product.id) || null
 	return (
-		<div
-			className={cn(
-				`${
-					currentItem ? 'text-black' : 'text-stone-500'
-				} absolute left-2 top-2 `,
-				className
-			)}
-		>
+		<div className={cn(`${'text-blue-500'} absolute left-2 top-2 `, className)}>
 			<button
 				className='cursor-pointer transition hover:scale-110'
 				onClick={() =>

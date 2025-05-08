@@ -1,6 +1,9 @@
 'use client'
 
-import { enumProductSort } from '@/src/services/product/product.types'
+import {
+	enumProductSort,
+	enumProductSortUk
+} from '@/src/services/product/product.types'
 import cn from 'clsx'
 import {
 	Dispatch,
@@ -40,17 +43,17 @@ const SortDropdown: FC<SortDropdownProps> = ({ sortType, setSortType }) => {
 			className='my-4 relative w-max ml-auto cursor-pointer select-none'
 		>
 			<div className='flex items-center gap-2'>
-				<span className='pl-2'>sort by:</span>
+				<span className='pl-2'>сортувати:</span>
 				<div
 					className={`${
 						showSort ? 'bg-linear-0 from-rose-50 to-white' : 'bg-white'
 					} py-1 rounded-lg w-28 px-4 shadow font-semibold hover:bg-linear-0 hover:from-rose-50 hover:to-white`}
 				>
-					{sortType}
+					{enumProductSortUk[sortType]}
 				</div>
 			</div>
 			{showSort && (
-				<ul className='w-28 absolute top-10 right-0 z-10 bg-white rounded-lg text-nowrap border-2 border-white shadow-2xl'>
+				<ul className='w-max absolute top-10 right-0 z-10 bg-white rounded-lg text-nowrap border-2 border-white shadow-2xl'>
 					{(
 						Object.keys(enumProductSort) as Array<keyof typeof enumProductSort>
 					).map(key => {
@@ -63,7 +66,7 @@ const SortDropdown: FC<SortDropdownProps> = ({ sortType, setSortType }) => {
 									)}
 									onClick={() => setSortType(enumProductSort[key])}
 								>
-									{enumProductSort[key]}
+									{enumProductSortUk[enumProductSort[key]]}
 								</li>
 							)
 					})}

@@ -10,17 +10,17 @@ const Category: FC = () => {
 	const { data: categories } = useQuery({
 		queryKey: ['get-categories'],
 		queryFn: () => CategoryService.getAll(),
-		select: ({ data }) => [{ name: 'all', slug: '' }, ...data]
+		select: ({ data }) => [{ name: 'Всі', slug: '' }, ...data]
 	})
 
 	const currentPath = usePathname().split('/').at(-1)
 	return (
 		<div className='text-text'>
 			<h3 className='uppercase text-sm font-semibold tracking-wide opacity-80'>
-				Categories:
+				Категорії:
 			</h3>
 			<div className='rounded-lg py-2'>
-				<ul className='flex flex-col gap-2 py-1 border-l pl-3'>
+				<ul className='flex flex-col gap-2 py-1 border-l pl-3 text-sm'>
 					{categories?.map(category => {
 						return (
 							<li className='relative' key={category.name}>

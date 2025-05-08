@@ -13,11 +13,13 @@ import {
 
 interface ConfirmModalProps {
 	handleClick: () => void
+	description?: string
 }
 
 export default function ConfirmModal({
 	children,
-	handleClick
+	handleClick,
+	description
 }: PropsWithChildren<ConfirmModalProps>) {
 	return (
 		<AlertDialog>
@@ -26,7 +28,7 @@ export default function ConfirmModal({
 				<AlertDialogHeader>
 					<AlertDialogTitle>Ви впевнені?</AlertDialogTitle>
 					<AlertDialogDescription>
-						Цю дію буде неможливо відмінити.
+						{description ? description : 'цю дію буде неможливо відмінити'}
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>

@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import {
 	FLUSH,
 	PAUSE,
@@ -28,6 +28,7 @@ const rootReducers = combineReducers({
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducers)
+export const useAppSelector: TypedUseSelectorHook<TypeRootState> = useSelector
 
 export const store = configureStore({
 	reducer: persistedReducer,

@@ -18,8 +18,17 @@ export type TypeDataFilters = {
 export enum enumProductSort {
 	RANK = 'rank',
 	DISCOUNT = 'discount',
-	HIGH_PRICE = 'high-price',
-	LOW_PRICE = 'low-price',
+	HIGH_PRICE = 'high_price',
+	LOW_PRICE = 'low_price',
 	NEWEST = 'newest',
 	OLDEST = 'oldest'
+}
+
+export enum enumProductSortUk {
+	rank = 'рейтинг',
+	discount = 'знижки',
+	high_price = 'від дорожчих',
+	low_price = 'від дешевих',
+	newest = 'нові',
+	oldest = 'старі'
 }

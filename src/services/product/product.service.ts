@@ -25,10 +25,11 @@ export const ProductService = {
 	},
 
 	async getBySlug(slug: string) {
-		return await axiosClassic<IProduct>({
-			url: `${PRODUCT}/by-slug${slug}`,
+		const { data } = await axiosClassic<IProduct>({
+			url: `${PRODUCT}/by-slug/${slug}`,
 			method: 'GET'
 		})
+		return data
 	},
 
 	async getByCategory(categorySlug: string, queryData = {} as TypeDataFilters) {
@@ -40,11 +41,12 @@ export const ProductService = {
 		return data
 	},
 
-	async getSimilar(productId: string) {
-		return await axiosClassic<IProduct>({
-			url: `${PRODUCT}/similar${productId}`,
+	async getSimilar(productSlug: string) {
+		const { data } = await axiosClassic<IProduct[]>({
+			url: `${PRODUCT}/similar/${productSlug}`,
 			method: 'GET'
 		})
+		return data
 	},
 
 	async create(product: TypeProduct) {

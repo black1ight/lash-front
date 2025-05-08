@@ -4,7 +4,7 @@ import { DataTable } from '@/src/components/ui/data-table/DataTable'
 import DataTableLoading from '@/src/components/ui/data-table/DataTableLoading'
 import Heading from '@/src/components/ui/Heading'
 import { useGetReviews } from '@/src/hooks/queries/reviews/useGetReviews'
-import { format } from 'date-fns'
+import { formattedDate } from '@/src/utils/formattedDate'
 import { IReviewColumn, reviewColumns } from './ReviewColumns'
 
 export function Reviews() {
@@ -13,7 +13,7 @@ export function Reviews() {
 	const formattedReviews: IReviewColumn[] = reviews
 		? reviews.map(review => ({
 				id: review.id,
-				createdAt: format(new Date(review.createdAt), 'dd.MM.yyyy'),
+				createdAt: formattedDate(review.createdAt),
 				rating: Array.from({ length: review.rating })
 					.map(() => '⭐')
 					.join(''),

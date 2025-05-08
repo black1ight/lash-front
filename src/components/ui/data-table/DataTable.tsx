@@ -95,11 +95,12 @@ export function DataTable<TData, TValue>({
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map(row => (
 								<TableRow
+									className=''
 									key={row.id}
 									data-state={row.getIsSelected() && 'selected'}
 								>
 									{row.getVisibleCells().map(cell => (
-										<TableCell key={cell.id}>
+										<TableCell className='' key={cell.id}>
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()

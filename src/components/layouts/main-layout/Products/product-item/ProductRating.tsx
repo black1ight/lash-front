@@ -15,7 +15,7 @@ const ProductRating: FC<{ product: IProduct }> = ({ product }) => {
 	const [rating, setRating] = useState(getRating(product.reviews) || 0)
 
 	return (
-		<div className='flex items-end gap-1 text-sm my-1'>
+		<div className='flex items-end gap-1 text-sm my-1 px-2'>
 			<Rating
 				readonly
 				initialValue={rating}
