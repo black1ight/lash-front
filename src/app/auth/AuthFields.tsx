@@ -69,6 +69,33 @@ export function AuthFields({ form, isPending, type }: AuthFieldsProps) {
 					</FormItem>
 				)}
 			/>
+			{isReg && (
+				<FormField
+					control={form.control}
+					name='phone'
+					rules={{
+						required: "Поле обов'язкове",
+						minLength: {
+							message: '9 символів після +380',
+							value: 13
+						}
+					}}
+					render={({ field }) => (
+						<FormItem>
+							<FormControl>
+								<Input
+									{...field}
+									value={field.value || '+380'}
+									placeholder='Phone'
+									type='tel'
+									disabled={isPending}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+			)}
 		</>
 	)
 }

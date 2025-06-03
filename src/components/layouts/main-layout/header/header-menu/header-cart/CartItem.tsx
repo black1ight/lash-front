@@ -50,7 +50,7 @@ export function CartItem({ item }: CartItemProps) {
 
 				<ConfirmModal
 					description='Видалити товар?'
-					handleClick={() => removeFromCart({ id: item.id })}
+					handleClick={() => removeFromCart(item)}
 				>
 					<Button
 						className='mx-auto mt-auto text-neutral-400 hover:text-pink-600 cursor-pointer hover:bg-white'

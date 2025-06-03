@@ -28,7 +28,7 @@ const AddToCartButton: FC<AddToCartButtonProps> = ({
 				className='cursor-pointer transition hover:scale-110'
 				onClick={() =>
 					currentItem
-						? removeFromCart({ id: currentItem.id })
+						? removeFromCart(currentItem)
 						: addToCart({
 								product,
 								quantity: 1,

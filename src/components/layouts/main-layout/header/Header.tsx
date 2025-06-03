@@ -4,6 +4,7 @@ import { PUBLIC_URL } from '@/src/config/url.config'
 import Link from 'next/link'
 import { FC } from 'react'
 import { HeaderSearch } from './HeaderSearch'
+import { BurgerMenu } from './header-menu/BurgerMenu'
 import { HeaderMenu } from './header-menu/HeaderMenu'
 
 const Header: FC = () => {
@@ -17,7 +18,10 @@ const Header: FC = () => {
 				<span className='text-white/50'>Store</span>
 			</Link>
 			<HeaderSearch />
-			<HeaderMenu />
+			<BurgerMenu />
+			<div className='max-sm:hidden'>
+				<HeaderMenu />
+			</div>
 		</div>
 	)
 }

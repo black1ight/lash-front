@@ -8,7 +8,7 @@ export function HeaderProfile() {
 	const { profile, isLoading, logout } = useProfile()
 
 	return (
-		<div className='ml-auto flex items-center text-white/50 hover:text-white rounded-lg'>
+		<div className='flex max-sm:order-1 items-center text-white/50 hover:text-white rounded-lg'>
 			{isLoading ? (
 				<Loader size='sm' />
 			) : (

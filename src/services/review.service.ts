@@ -24,6 +24,14 @@ export const ReviewsService = {
 		})
 	},
 
+	async getByProductId(productId: number | string) {
+		const { data } = await axiosWithAuth<IReview[]>({
+			url: `${REVIEWS}/byProductId/${productId}`,
+			method: 'GET'
+		})
+		return data
+	},
+
 	async getAverageByProduct(productId: number | string) {
 		return await axiosWithAuth<{ rating: number }>({
 			url: `${REVIEWS}/average-by-product/${productId}`,

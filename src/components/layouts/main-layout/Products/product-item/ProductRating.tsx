@@ -2,10 +2,18 @@
 
 import { IProduct } from '@/src/types/product.interface'
 import { getRating } from '@/src/utils/getRating'
-import { FC, useState } from 'react'
+import cn from 'clsx'
+import { ButtonHTMLAttributes, FC, PropsWithChildren, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 
-const ProductRating: FC<{ product: IProduct }> = ({ product }) => {
+interface ProductRatingProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	product: IProduct
+}
+
+const ProductRating: FC<PropsWithChildren<ProductRatingProps>> = ({
+	product,
+	className
+}) => {
 	// const { data: rating } = useQuery({
 	// 	queryKey: ['get product rating', product.id],
 	// 	queryFn: () => ReviewsService.getAverageByProduct(product.id),
@@ -15,7 +23,7 @@ const ProductRating: FC<{ product: IProduct }> = ({ product }) => {
 	const [rating, setRating] = useState(getRating(product.reviews) || 0)
 
 	return (
-		<div className='flex items-end gap-1 text-sm my-1 px-2'>
+		<div className={cn('flex items-end gap-1 text-sm my-1', className)}>
 			<Rating
 				readonly
 				initialValue={rating}

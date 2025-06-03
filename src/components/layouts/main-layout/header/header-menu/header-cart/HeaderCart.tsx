@@ -24,7 +24,14 @@ export function HeaderCart() {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button variant='ghost'>Кошик</Button>
+				<Button className='relative' variant='ghost'>
+					{items.length > 0 && (
+						<span className='absolute w-4 h-4 text-xs flex items-center justify-center text-black/80 bg-pink-500 rounded-full top-[1px] right-[1px]'>
+							{items.length}
+						</span>
+					)}
+					Кошик
+				</Button>
 			</SheetTrigger>
 			<SheetContent className='py-6'>
 				<DialogTitle>

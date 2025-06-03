@@ -15,19 +15,21 @@ const Category: FC = () => {
 
 	const currentPath = usePathname().split('/').at(-1)
 	return (
-		<div className='text-text'>
-			<h3 className='uppercase text-sm font-semibold tracking-wide opacity-80'>
+		<div className='max-sm:text-white/50 text-text max-sm:text-base text-sm'>
+			<h3 className='uppercase font-semibold tracking-wide opacity-80'>
 				Категорії:
 			</h3>
 			<div className='rounded-lg py-2'>
-				<ul className='flex flex-col gap-2 py-1 border-l pl-3 text-sm'>
+				<ul className='flex flex-col gap-2 py-1 border-l pl-3'>
 					{categories?.map(category => {
 						return (
 							<li className='relative' key={category.name}>
 								<Link
 									className={cn('gap-1 cursor-pointer hover:text-pink-500', {
-										'text-pink-500': currentPath === category.slug,
-										'text-text': currentPath !== category.slug
+										'text-pink-500 max-sm:text-white/50':
+											currentPath === category.slug,
+										'text-text max-sm:text-white/50':
+											currentPath !== category.slug
 									})}
 									href={
 										category.slug === '' ? '/' : `/category/${category.slug}`

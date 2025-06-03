@@ -44,7 +44,7 @@ const ProductInfoLabel: FC<PropsWithChildren<ProductInfoLabelProps>> = ({
 	}, [diffInDays, targetDays, product.discount])
 
 	return (
-		<div className='absolute z-10 bottom-2 right-2 space-y-1'>
+		<div className={cn('absolute z-10 bottom-2 right-2 space-y-1', className)}>
 			{actionLabels.length > 0 &&
 				actionLabels.map(el => {
 					return (

@@ -1,12 +1,14 @@
 import {
 	IAddToCartPayload,
 	ICartInitialState,
+	ICartItem,
 	IChangeQuantityPayload
 } from '@/src/types/cart.interface'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: ICartInitialState = {
-	items: []
+	items: [],
+	targetItem: null
 }
 
 export const cartSlice = createSlice({
@@ -20,12 +22,17 @@ export const cartSlice = createSlice({
 
 			if (!isExistSize) {
 				state.items.push({ ...action.payload, id: state.items.length })
+				state.targetItem = { ...action.payload, action: 'add' }
 			}
 		},
-		removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
+		removeFromCart: (state, action: PayloadAction<ICartItem>) => {
 			state.items = state.items
 				.filter(item => item.id !== action.payload.id)
 				.map((elem, index) => ({ ...elem, id: index }))
+			state.targetItem = { ...action.payload, action: 'remove' }
+		},
+		removeTargetItem: state => {
+			state.targetItem = null
 		},
 		changeQuantity: (state, action: PayloadAction<IChangeQuantityPayload>) => {
 			const { id, type } = action.payload
@@ -46,5 +53,10 @@ export const cartSlice = createSlice({
 	}
 })
 
-export const { addToCart, changeQuantity, removeFromCart, reset } =
-	cartSlice.actions
+export const {
+	addToCart,
+	changeQuantity,
+	removeFromCart,
+	reset,
+	removeTargetItem
+} = cartSlice.actions

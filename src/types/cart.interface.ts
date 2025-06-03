@@ -7,8 +7,13 @@ export interface ICartItem {
 	price: number
 }
 
+type ICartItemWithAction = Omit<ICartItem, 'id'> & {
+	action: string
+}
+
 export interface ICartInitialState {
 	items: ICartItem[]
+	targetItem: ICartItemWithAction | null
 }
 
 export interface IAddToCartPayload extends Omit<ICartItem, 'id'> {}
